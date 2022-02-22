@@ -1,0 +1,65 @@
+﻿@page
+@model Kodius.Pages.AdminPages.StockModel
+@{
+}
+<div id="app">
+    <div v-for="product in products">
+
+        <a v-for="p in product.stock" @@click="selectProduct(product)">
+            <p>{{p.id}} - {{p.productName}} - {{p.kolicina}}</p>
+        </a>
+    </div>
+
+
+    @*    <div class="columns">
+        <div class="column is-3">
+        <table class="table">
+        <tr>
+        <th>Product Name</th>
+        <th>Product ID</th>
+        <th>Product Kolicina</th>
+        </tr>
+        <tr v-for="product in products" @@click="selectProduct(product)">
+
+        <td>{{product.id}}</td>
+        <div v-for="p in product.stock">
+        <td>{{p.productName}}</td>
+        <td>{{p.kolicina}}</td>
+        </div>
+        </tr>
+        </table>*@
+
+    <div class="column is-6" v-if="selectedProduct">
+        <table class="table">
+            <tr v-for="(stock, index) in selectedProduct.stock">
+                <td><input class="input" v-model="stock.id" /></td>
+                <td><a class="has-text-danger" @@click="deleteStock(stock.id, index)">Delete</a></td>
+                <td><a class="has-text-danger" @@click="getStock">Get STOCK</a></td>
+            </tr>
+        </table>
+        <a class="button is-warning" @@click="updateStock">
+            Update Products
+        </a>
+    </div>
+    <div class="column is-3" v-if="selectedProduct">
+        <h2 class="title">New Stock</h2>
+        <div class="field">
+            <div class="control">
+                <input class="input" v-model="newStock.productName" />
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input class="input" v-model="newStock.kolicina" />
+            </div>
+        </div>
+        <a class="button is-success" @@click="addStock">Add</a>
+    </div>
+</div>
+
+
+@section scripts {
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="~/js/admin/stock.js"></script>
+}

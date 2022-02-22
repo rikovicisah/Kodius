@@ -1,0 +1,52 @@
+﻿@page
+@model Kodius.Pages.Admin.IndexModel
+@{
+}
+
+
+
+<div id="app" class="container">
+    @*<button v-on:click="getProducts">Get Products</button>*@
+
+    <div >
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Product Name</th>
+                <th>Product Price</th>
+            </tr>
+            <tr v-for="(product,index) in products">
+                <td>{{product.id}}</td>
+                <td>{{product.productName}}</td>
+                <td>{{product.productPrice}}</td>
+                <td><button v-on:click="editProduct(product, index)" class="button">Edit Product</button></td>
+                <td><button v-on:click="deleteProduct(product.id, index)" class="button">Delete Product</button>   </td>
+            </tr>
+        </table>
+    </div>
+    <br /><br />
+    
+    <div class="columns">
+        <div class="column is-half">
+            <input class="input is-primary" v-model="productModel.productName"/>
+            <br /><br />
+            <input class="input is-primary" v-model="productModel.productPrice"/>
+            <br /><br />
+            <button v-on:click="createProduct" class="button">Create Product</button>
+        <button v-on:click="updateProduct" class="button">Update Product</button>
+        </div>
+        <br /><br />
+        
+
+        
+        
+    </div>
+</div>
+
+
+@section scripts{
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="~/js/Admin/main.js" ></script>
+}

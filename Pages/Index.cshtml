@@ -1,0 +1,16 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<div>
+
+    @{
+        foreach(var p in Model.SviProizvodi)
+        {
+            <a asp-page="Product" asp-route-name="@p.ProductName">@p.ProductName - @p.ProductPrice</a>
+        }
+    }   
+</div>
